@@ -1,0 +1,18 @@
+---
+title: "Lory Salazar"
+image: "lory_pic.jpg"
+links:
+  - label: LinkedIn
+    url: "https://linkedin.com/"
+  - label: Twitter
+    url: "https://twitter.com/"
+  - label: GitHub
+    url: "https://github.com/"
+  - label: Email
+    url: "mailto:email@email.com"
+output:
+  postcards::jolla
+site: distill::distill_website
+---
+ 
+I am a first-year master's student studying Conservation Planning at the Bren School of Environmental Science & Management.

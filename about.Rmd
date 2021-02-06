@@ -1,10 +1,13 @@
 ---
-title: "About this site"
-description: |
-  Some additional details about the website
+title: "About"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+> Lory Salazar-Velasquez, a first-year master’s student, graduated from the University of Nevada, Las Vegas in 2019 with a Bachelor of Science in Ecology and Evolutionary Biology and a minor in Political Science. During her undergraduate career, Lory accepted an internship at Sable Systems International, the world’s leader in metabolic and behavioral measurement equipment, where she conducted biotechnology market research and assisted in the development of marketing content. Additionally, she joined the executive board of the Ecology, Conservation, and Evolution Club and created on-campus events to promote environmental issues to other students. In her spare time, she volunteered at the Lion Habitat Ranch Zoo, where she first became interested in pursuing wildlife conservation. Upon graduation, she remained at Sable Systems as a Creative Marketing Assistant and led the video production team. In this role, she became interested in how media and communications can be used in STEM fields. Lory decided to pursue environmental science as a means to merge her interests in biology, conservation, and communications. At the Bren School, Lory is specializing in Conservation Planning. In the future, she hopes to manage wildlife populations as a conservation specialist, as well as to use her communications and media skills to encourage widespread conservation education.
+
+As a first year master’s student in environmental science and management, I have been exposed to an array of topics within the environmental field, such as ecology, data science, and environmental policy, which I plan to expand while at the Bren School of Environmental Science & Management. Specifically, I want to gain practical technical skills, such as using GIS for spatial analysis of managing protected wildlife areas, and incorporate my existing communications and marketing abilities to apply throughout my career. I plan to declare a Conservation Planning specialization to learn in-situ and ex-situ methods of managing and preserving wildlife populations for achieving conservation goals. This specialization will extend my previous knowledge of ecology, conservation, and policy, and allow me to pursue new hard and soft skills.
+After graduating, I aim to work in the conservation field, using my scientific knowledge in collaboration with government agencies to recommend and apply conservation activities throughout the United States. I believe that working in government and understanding environmental policies are vital to conservation efforts. I am confident that my skills will be of best use in this field.
+I look forward to the near future where my new conservation expertise I’ve gained at Bren can be used to protect and sustain our ecosystems and natural resources.

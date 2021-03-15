@@ -13,5 +13,7 @@ navbar:
       href: lory_cv.html
     - text: "Projects"
       href: blog.html
+    - text: "Resume"
+      href: resume/resume.pdf
 output: distill::distill_article
 theme: postcards.css

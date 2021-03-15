@@ -65,8 +65,7 @@ low_dems %>%
   kable(col.names = c("District ID", "Candidate Name", "Proportion of Votes Won", "LCV Score", 
                       "GW Happening Oppose", "GW Human-caused Oppose", "Congress Oppose"),
         caption = "Table 1. Constituents' beliefs on global warming for congressional districts with Democratic candidates who won their election by less than 51%." ) %>% 
-  kable_styling(full_width = FALSE,
-                bootstrap_options = "striped")
+  kable_styling(full_width = FALSE)
 
 ```
 

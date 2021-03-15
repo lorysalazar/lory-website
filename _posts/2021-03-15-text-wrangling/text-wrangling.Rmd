@@ -1,0 +1,124 @@
+---
+title: "Text wrangling analysis"
+description: |
+  Practicing text mining and analysis skills with the screenplay for the film Avengers: Endgame.
+author:
+  - name: Lory Salazar
+    url: {}
+date: 03-15-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE )
+library(tidyverse)
+library(tidytext)
+library(textdata)
+library(pdftools)
+library(ggwordcloud)
+library(here)
+```
+
+## Introduction: Text wrangling and analysis for the screenplay of the movie Avengers: Endgame
+
+In this report, we use text mining and analysis skills to look at the top used words in the screenplay for Avengers: Endgame. Additionally, we perform sentiment analysis using the nrc lexicon to visualize the sentiments used throughout the film.
+
+```{r}
+endgame_text <- pdf_text("endgame.pdf")
+```
+
+### Text wrangling
+
+To begin, we create a tidy dataframe based off of a PDF of the screenplay. We wrangle the dataset to remove all stop words, so that our end result is all non-stop words used in the screenplay. These are the words that we use in our next steps to look at both the most used words and most used sentiments in the film.
+
+```{r}
+# Creating a tidy dataframe
+endgame_tidy <- data.frame(endgame_text) %>% 
+  mutate(text_full = str_split(endgame_text, pattern = "\\n")) %>% 
+  unnest(text_full) %>% 
+  mutate(text_full = str_trim(text_full)) %>% 
+  slice(-(1:8))
+
+endgame_tokens <- endgame_tidy %>% 
+  unnest_tokens(word, text_full) %>% 
+  select(-endgame_text)
+
+# Remove all stopwords, then look at what the counts look like
+endgame_nonstop <- endgame_tokens %>% 
+  anti_join(stop_words)
+
+nonstop_counts <- endgame_nonstop %>% 
+  count(word)
+```
+
+### Word cloud of top most used words in Avengers: Endgame
+
+Before creating our word cloud, we wrangle the data further to look at the top most used words, arranged in ascending order, then look at only the top 100 words. 
+
+```{r}
+# Looking at the top most used words in the screenplay
+top_5 <- nonstop_counts %>% 
+  arrange(-n) %>% 
+  slice(1:5)
+
+# Because our word cloud will have the top 100 most used words, first create a subset of the top 100 words
+top_100 <- nonstop_counts %>% 
+  arrange(-n) %>% 
+  slice(1:100)
+
+```
+
+Next, we are able to use `ggplot` to create a wordcloud of the wrangled text. We use color and size to indicate the larger presence of the words.
+
+```{r}
+# Creating a word cloud of the top words used 
+
+ggplot(data = top_100, aes(label = word)) +
+  geom_text_wordcloud(aes(color = n, size = n), shape = "diamond") +
+  scale_size_area(max_size = 6) +
+  scale_colour_gradientn(colors = c("cyan3","blue","purple")) +
+  theme_minimal() +
+  labs(title = "Top 100 words in Avengers: Endgame")
+
+```
+
+**Figure 1.** A wordcloud to visualize the top 100 words used in the screenplay for Avengers: Endgame. Bigger words indicate a more frequently used word. Purple, blue, and cyan colors indicate a word appears more to less frequently, respectively.
+
+### Using sentiment analysis to visualize the sentiments of Avengers: Endgame
+Next, we use sentiment analysis to visualize the number of occurrences of different sentiments in the screenplay. To do so, we first look at both the afinn and nrc lexicons. We proceed to use the nrc lexicon to create a plot visualizing the top used sentiments, based on counts, in Avengers: Endgame.
+
+```{r}
+# First looking at what the words look like in "afinn"
+afinn_pos <-get_sentiments("afinn") %>% 
+  filter(value > 2)
+
+# Looking at "afinn" specifically four our text, then getting the counts
+endgame_afinn <- endgame_nonstop %>% 
+  inner_join(get_sentiments("afinn"))
+
+afinn_counts <- endgame_afinn %>% 
+  count(value)
+
+# Performing the same steps, but for "nrc", which we will then use for our plot.
+
+endgame_nrc <- endgame_nonstop %>% 
+  inner_join(get_sentiments("nrc"))
+
+nrc_counts <- endgame_nrc %>% 
+  count(sentiment)
+
+ggplot(data = nrc_counts, aes(x = reorder (sentiment, -n), y = n)) +
+  geom_col() +
+  labs(title = "Sentiment analysis for Avengers: Endgame",
+       x = "Sentiment", y = "Number of occurences") +
+  theme_minimal()
+
+```
+
+**Figure 2.** The number of occurrences of words with different sentiments in Avengers: Endgame using the nrc lexicon, from most frequently used sentiment to less frequently used sentiment.
+
+### Data citation
+Christopher Markus & Stephen McFeely
+Markus, Christopher, and McFeely, Stephan. Screenplay of *Avengers: Endgame*. Disney Studio Awards, https://disneystudiosawards.s3.amazonaws.com/avengers-endgame/Avengers_Endgame.pdf

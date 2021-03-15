@@ -39,6 +39,13 @@ metadata <- metadata[order,]
 ```
 
 ## Selecting a congressional district
+To begin, we filter a dataset from the 116th Congress to select for Democrats who won their election in 2018 by less than 51% and have a high LCV score. From these congresspeople, we select for a few different variables related to global warming to look at the percentage of constituents who believe:
+
+- Global warming is occuring
+- Global warming is caused by natural influence, not by human influence
+- Congress should not act or should act less on global warming
+
+We create a table to get an overview of what these congressional districts look like.
 
 ```{r}
 # Filtering for democrats who barely won their seat in the general, have a high lcv score and have high opposition of key GW variables
@@ -74,7 +81,7 @@ ggplot(data = low_dems, aes(x= humanOppose,
   theme_minimal() + 
   labs(y = "Opposed to Congress acting on GW (percentage)",
        x = "Believed GW is not caused by human influence (percentage)",
-       title = "Relationship between constituents' beliefs on global warming (GW) variables,\nby congressional districts")
+       title = "Relationship between constituents' beliefs on global warming (GW)\nvariables, by congressional districts")
 ```
 
 **Figure 1.** Opinions on global warming (GW) within congressional districts with Democratic representatives who won their seat in the previous election by less than 51%. Points which are further right and towards the top of the plot indicate districts that both believed global warming is largely not caused by human influence and that congress should not act strongly on global warming.
@@ -93,8 +100,6 @@ Congressman Brindisi is at risk of losing reelection in New York District 22 due
 ## Creating a public campaign
 Because NY-22 has an older population, we selected a newspaper advertisement as a potential route for a public campaign. A mockup of the advertisement is included below, attacking Congressman Brindisi with the hope of unseating him in the district. 
 
-```{r}
-knitr::include_graphics(here("data","campaign.png"))  
-```
 
+![](campaign.png)
 
